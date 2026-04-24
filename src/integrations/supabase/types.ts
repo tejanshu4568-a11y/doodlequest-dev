@@ -14,7 +14,113 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      chat_messages: {
+        Row: {
+          content: string
+          created_at: string
+          id: string
+          user_id: string
+          username: string
+        }
+        Insert: {
+          content: string
+          created_at?: string
+          id?: string
+          user_id: string
+          username: string
+        }
+        Update: {
+          content?: string
+          created_at?: string
+          id?: string
+          user_id?: string
+          username?: string
+        }
+        Relationships: []
+      }
+      profiles: {
+        Row: {
+          avatar_url: string | null
+          created_at: string
+          display_name: string | null
+          id: string
+          quests_completed: number
+          total_strokes: number
+          updated_at: string
+          username: string
+        }
+        Insert: {
+          avatar_url?: string | null
+          created_at?: string
+          display_name?: string | null
+          id: string
+          quests_completed?: number
+          total_strokes?: number
+          updated_at?: string
+          username: string
+        }
+        Update: {
+          avatar_url?: string | null
+          created_at?: string
+          display_name?: string | null
+          id?: string
+          quests_completed?: number
+          total_strokes?: number
+          updated_at?: string
+          username?: string
+        }
+        Relationships: []
+      }
+      quest_logs: {
+        Row: {
+          created_at: string
+          id: string
+          quest_id: string
+          time_taken_seconds: number
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          quest_id: string
+          time_taken_seconds: number
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          quest_id?: string
+          time_taken_seconds?: number
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "quest_logs_quest_id_fkey"
+            columns: ["quest_id"]
+            isOneToOne: false
+            referencedRelation: "quests"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      quests: {
+        Row: {
+          created_at: string
+          id: string
+          prompt_word: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          prompt_word: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          prompt_word?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
